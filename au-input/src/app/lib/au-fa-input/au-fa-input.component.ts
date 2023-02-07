@@ -1,4 +1,5 @@
 import {AfterContentInit, Component, ContentChild, Input} from '@angular/core';
+import {InputRefDirective} from "../common/input-ref.directive";
 
 @Component({
   selector: 'app-au-fa-input',
@@ -11,8 +12,8 @@ export class AuFaInputComponent implements AfterContentInit {
   icon?: string;
 
   // embedded <input #input> html elements
-  @ContentChild('input')
-  input!: HTMLInputElement;
+  @ContentChild(InputRefDirective)
+  input!: InputRefDirective;
 
   constructor() {  }
 
