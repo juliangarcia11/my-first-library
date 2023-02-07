@@ -28,3 +28,10 @@
   }
 }
 
+:host(.input-focus) {
+  outline: none;
+  border: 1px solid #4D90FE;
+  -webkit-box-shadow: 0 0 5px #4D90FE;
+  box-shadow: 0 0 5px #4D90FE;
+}
+
