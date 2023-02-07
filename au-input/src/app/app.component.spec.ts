@@ -30,7 +30,10 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    emailField = el.query(By.css('#email-field'))
+    emailField = el.query(By.css('#email-field'));
+
+    // run angular change detections
+    fixture.detectChanges();
   });
 
   // each 'it' is a test
@@ -43,6 +46,9 @@ describe('AppComponent', () => {
   });
 
   it('should include the correct email icon in the email input', () => {
+    console.log('my test!');
+    console.log(emailField.nativeElement.outerHTML);
+
     expect(emailField.query(By.css('i.icon.fa.fa-envelope'))).toBeTruthy();
   });
 
