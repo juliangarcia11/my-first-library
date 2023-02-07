@@ -2,6 +2,8 @@
 
 package-lock.json
 
+*/node_modules
+
 # IDEs and editors
 .idea/
 .project
