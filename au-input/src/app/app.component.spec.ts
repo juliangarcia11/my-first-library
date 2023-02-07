@@ -1,31 +1,29 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {AuFaInputComponent} from "./lib/au-fa-input/au-fa-input.component";
+import {InputRefDirective} from "./lib/common/input-ref.directive";
+
+// jasmine is our test framework
 
 describe('AppComponent', () => {
+
+  // before each test
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        // add components to test here
+        AppComponent, AuFaInputComponent, InputRefDirective
       ],
-    }).compileComponents();
+    }).compileComponents(); // tests only occur after components are compiled
   });
 
+  // each 'it' is a test
   it('should create the app', () => {
+    // create a component to test
     const fixture = TestBed.createComponent(AppComponent);
+    // access component param
     const app = fixture.componentInstance;
+    // execute test
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'au-input'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('au-input');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('au-input app is running!');
   });
 });
