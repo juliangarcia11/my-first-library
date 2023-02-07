@@ -1,0 +1,7 @@
+// Theme related styles
+
+:host-context(.red-theme) {
+  border-color: red;
+  -webkit-box-shadow: 0 0 5px red;
+  box-shadow: 0 0 5px red;
+}
