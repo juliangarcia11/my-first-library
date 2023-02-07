@@ -11,7 +11,8 @@ describe('AppComponent', () => {
 
   let component: AppComponent,
       fixture: ComponentFixture<AppComponent>,
-      el: DebugElement;
+      el: DebugElement,
+      emailField: DebugElement;
 
   // before each test
   beforeEach(async () => {
@@ -25,24 +26,27 @@ describe('AppComponent', () => {
 
   // before each test
   beforeEach(() => {
-    // create a component to test
+    // initialize common params
     fixture = TestBed.createComponent(AppComponent);
-    // access component param
     component = fixture.componentInstance;
-    // defined debug element
     el = fixture.debugElement;
+    emailField = el.query(By.css('#email-field'))
   });
 
   // each 'it' is a test
   it('should create the app', () => {
-    // execute test
     expect(component).toBeTruthy();
   });
 
   it('should create a font awesome email input', () => {
-    const emailField = el.query(By.css('#email-field'));
-
     expect(emailField).toBeTruthy();
+  });
+
+  it('should include the correct email icon in the email input', () => {
     expect(emailField.query(By.css('i.icon.fa.fa-envelope'))).toBeTruthy();
-  })
+  });
+
+  it('should have projected the correct test input inside the email field', () => {
+    expect(emailField.query(By.css('input.test-class'))).toBeTruthy();
+  });
 });
