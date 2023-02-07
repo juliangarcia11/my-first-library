@@ -10,7 +10,6 @@ import {AuInputModule} from "./lib/au-input.module";
   ],
   imports: [
     BrowserModule,
-
     AuInputModule
   ],
   providers: [],

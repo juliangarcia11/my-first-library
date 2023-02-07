@@ -4,7 +4,7 @@ import {Directive, HostListener} from '@angular/core';
  * Defines a referencable version of the 'app-au-fa-input input' HtmlInputElement
  */
 @Directive({
-  selector: 'app-au-fa-input input'
+  selector: 'app-au-fa-input input',
 })
 export class InputRefDirective {
 

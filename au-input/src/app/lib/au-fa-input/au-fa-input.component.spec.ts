@@ -17,7 +17,7 @@ describe('AuFaInputComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create an AuFaInputComponent', () => {
     expect(component).toBeTruthy();
   });
 });

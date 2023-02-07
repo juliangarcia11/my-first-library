@@ -18,9 +18,8 @@ export class AuFaInputComponent implements AfterContentInit {
   constructor() {  }
 
   ngAfterContentInit() {
-    console.log('testing testing is input here:', this.input);
     if(!this.input) {
-      console.error('The app-au-fa-input requires an input element inside its content');
+      console.error('DEV ERROR: The app-au-fa-input requires an input element inside its content');
     }
   }
 
