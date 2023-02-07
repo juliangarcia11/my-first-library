@@ -1,0 +1,9 @@
+// angular will use this class and generate a more specific selector to attempt to only apply
+// this styling to the <au-fa-input> component
+.icon {
+  width: 20px;
+  text-align: center;
+  background: white;
+  padding-left: 5px;
+  padding-right: 2px;
+}
