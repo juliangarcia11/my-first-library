@@ -1,9 +1,17 @@
-<!-- use retrieved title params from the projected content -->
-<ul class="tab-panel-buttons" *ngIf="tabs">
-  <li *ngFor="let tab of tabs"
-      (click)="selectTab(tab)"
-      [ngClass]="{selected: tab.selected}">{{tab.title}}</li>
-</ul>
+<!-- ng-template will not be rendered into the dom unless it is specifically used (like in a ng-container) -->
+<ng-template #defaultTabsHeader let-tabs="tabs">
+
+  <ul class="tab-panel-buttons" *ngIf="tabs">
+    <!-- use retrieved title params from the projected content -->
+    <li *ngFor="let tab of tabs"
+        (click)="selectTab(tab)"
+        [ngClass]="{selected: tab.selected}">{{tab.title}}</li>
+  </ul>
+
+</ng-template>
+
+<!-- utilizing the template container, we take template & give it context, then render that into the dom -->
+<ng-container *ngTemplateOutlet="defaultTabsHeader; context: tabsContext"></ng-container>
 
 <!-- projected content -->
 <ng-content></ng-content>

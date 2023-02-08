@@ -19,8 +19,8 @@ export class AuTabPanelComponent implements AfterContentInit {
     // find any selected tab
     const selectedTab = this.tabs.find(t => t.selected);
 
-    // if no selected tabs
-    if (!selectedTab) {
+    // if no selected tabs && there is at least one tab
+    if (!selectedTab && this.tabs.first) {
       // select the first tab by default
       this.tabs.first.selected = true;
     }
@@ -33,5 +33,12 @@ export class AuTabPanelComponent implements AfterContentInit {
   selectTab(tab: AuTabComponent) {
     this.tabs.forEach(t => t.selected = false);
     tab.selected = true;
+  }
+
+  /**
+   * @returns { tabs: QueryList<AuTabComponent> } Context to be utilized by <ng-container>
+   */
+  get tabsContext(): { tabs: QueryList<AuTabComponent> } {
+    return { tabs: this.tabs };
   }
 }
