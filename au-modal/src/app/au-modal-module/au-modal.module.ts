@@ -2,15 +2,17 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AuModalComponent} from "./au-modal/au-modal.component";
+import { AuModalOpenOnClickDirective } from './au-modal-open-on-click.directive';
 
 @NgModule({
   declarations: [
-    AuModalComponent
+    AuModalComponent,
+    AuModalOpenOnClickDirective
   ],
   imports: [
     CommonModule
   ],
-  exports: [AuModalComponent]
+  exports: [AuModalComponent, AuModalOpenOnClickDirective]
 })
 export class AuModalModule {
 

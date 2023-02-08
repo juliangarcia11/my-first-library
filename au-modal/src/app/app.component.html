@@ -62,8 +62,10 @@
 
   </ng-template>
 
-  <!-- add the modal to the page and use the authModalBody as the body input of the app-au-modal -->
-  <app-au-modal class="auth-modal" [body]="authModalBody"></app-au-modal>
+  <ng-template *ngIf="false">
+    <!-- add the modal to the page and use the authModalBody as the body input of the app-au-modal -->
+    <app-au-modal class="auth-modal" [body]="authModalBody"></app-au-modal>
+  </ng-template>
 
 
   <div class="modal-buttons">
