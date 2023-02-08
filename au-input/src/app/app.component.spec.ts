@@ -4,6 +4,7 @@ import {AuFaInputComponent} from "./lib/au-fa-input/au-fa-input.component";
 import {InputRefDirective} from "./lib/common/input-ref.directive";
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
+import {AuMdInputComponent} from "./lib/au-md-input/au-md-input.component";
 
 // jasmine is our test framework
 
@@ -19,7 +20,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         // add components to test here
-        AppComponent, AuFaInputComponent, InputRefDirective
+        AppComponent, AuFaInputComponent, AuMdInputComponent, InputRefDirective
       ],
     }).compileComponents(); // tests only occur after components are compiled
   });
@@ -46,9 +47,6 @@ describe('AppComponent', () => {
   });
 
   it('should include the correct email icon in the email input', () => {
-    console.log('my test!');
-    console.log(emailField.nativeElement.outerHTML);
-
     expect(emailField.query(By.css('i.icon.fa.fa-envelope'))).toBeTruthy();
   });
 
