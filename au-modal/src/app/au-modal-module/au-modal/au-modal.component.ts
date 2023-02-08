@@ -10,4 +10,8 @@ export class AuModalComponent {
   // hold a references to an injectable template
   @Input()
   body: TemplateRef<any> | undefined;
+
+  closeModal(): void {
+    console.log('close modal event triggerred');
+  }
 }

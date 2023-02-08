@@ -1,9 +1,13 @@
-import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import {AfterContentInit, ContentChild, Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import {AuModalComponent} from "./au-modal/au-modal.component";
 
 @Directive({
   selector: '[appAuModalOpenOnClick]'
 })
-export class AuModalOpenOnClickDirective {
+export class AuModalOpenOnClickDirective implements AfterContentInit {
+
+  @ContentChild(AuModalComponent)
+  modal: AuModalComponent | undefined;
 
 
   constructor(
@@ -35,5 +39,9 @@ export class AuModalOpenOnClickDirective {
 
       });
     });
+  }
+
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit',this.modal);
   }
 }
