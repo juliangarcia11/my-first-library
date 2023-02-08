@@ -11,7 +11,10 @@
 </ng-template>
 
 <!-- utilizing the template container, we take template & give it context, then render that into the dom -->
-<ng-container *ngTemplateOutlet="defaultTabsHeader; context: tabsContext"></ng-container>
+<!-- if a custom headerTemplate is not provided, use the defaultTabsHeader -->
+<ng-container
+  *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTabsHeader; context: tabsContext">
+</ng-container>
 
 <!-- projected content -->
 <ng-content></ng-content>

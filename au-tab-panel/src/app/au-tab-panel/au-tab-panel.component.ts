@@ -1,4 +1,13 @@
-import {AfterContentInit, Component, ContentChildren, OnInit, QueryList} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  Input,
+  OnInit,
+  QueryList,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {AuTabComponent} from "../au-tab/au-tab.component";
 
 @Component({
@@ -11,6 +20,10 @@ export class AuTabPanelComponent implements AfterContentInit {
   // retrieve an iterable list of AuTabComponents that have been projected into this panel component
   @ContentChildren(AuTabComponent)
   tabs: QueryList<AuTabComponent> = new QueryList<AuTabComponent>();
+
+  // allow components that use this one to input a custom template to be used in the header section
+  @Input()
+  headerTemplate: TemplateRef<any> | undefined;
 
   /**
    * After content children are done loading in, perform an action

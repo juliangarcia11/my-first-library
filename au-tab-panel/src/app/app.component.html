@@ -5,12 +5,19 @@
 
 <div class="container">
 
+  <!-- customized header to be projected into <app-au-tab-panel> to be used as the header buttons -->
+  <ng-template #headerButtons>
+    <button (click)="tabPanel.selectTab(loginTab)">Login</button>
+    <button (click)="tabPanel.selectTab(signUpTab)">Sign Up</button>
+    <button (click)="tabPanel.selectTab(contactTab)">Contact</button>
+  </ng-template>
+
   <!-- build the tab panel from ... -->
-  <app-au-tab-panel>
+  <!-- (remove the [headerTemplate] setting to go back to default header implementation) -->
+  <app-au-tab-panel #tabPanel [headerTemplate]="headerButtons">
 
     <!-- projecting the login tab into the tab-panel, and ... -->
-    <app-au-tab title="Login">
-
+    <app-au-tab title="Login" #loginTab>
       <!-- projecting the form into the tab itself -->
       <form>
         <div class="form-field">
@@ -24,7 +31,7 @@
 
 
     <!-- projecting the sign up tab into the tab-panel, and ... -->
-    <app-au-tab title="Sign Up">
+    <app-au-tab title="Sign Up" #signUpTab>
 
       <!-- projecting the form into the tab itself -->
       <form>
@@ -41,7 +48,7 @@
     </app-au-tab>
 
     <!-- projecting the contact tab into the tab-panel ... -->
-    <app-au-tab title="Contact">
+    <app-au-tab title="Contact" #contactTab>
 
       <!-- projecting the form into the tab itself -->
       <form>
