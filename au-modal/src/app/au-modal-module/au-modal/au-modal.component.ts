@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-au-modal',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AuModalComponent {
 
+  // hold a references to an injectable template
+  @Input()
+  body: TemplateRef<any> | undefined;
 }
