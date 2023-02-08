@@ -17,4 +17,4 @@ import { AuTabComponent } from './au-tab/au-tab.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AuTabPanelModule { }

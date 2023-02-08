@@ -1,0 +1,11 @@
+// Theme related styles
+:host {
+  background: white;
+  border-color: lightgray;
+}
+
+:host(.input-focus) {
+  border-color: #4D90FE;
+  -webkit-box-shadow: 0 0 5px #4D90FE;
+  box-shadow: 0 0 5px #4D90FE;
+}

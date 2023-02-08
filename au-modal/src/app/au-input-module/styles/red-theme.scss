@@ -1,0 +1,12 @@
+// Theme related styles
+
+$border-color: red;
+
+:host-context(.red-theme) {
+  border-color: $border-color;
+
+  &.input-focus {
+    -webkit-box-shadow: 0 0 5px $border-color;
+    box-shadow: 0 0 5px $border-color;
+  }
+}
