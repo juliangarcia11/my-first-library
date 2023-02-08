@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {AuTabPanelComponent} from "./au-tab-panel/au-tab-panel.component";
+import {AuTabComponent} from "./au-tab/au-tab.component";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent, AuTabPanelComponent, AuTabComponent
       ],
     }).compileComponents();
   });

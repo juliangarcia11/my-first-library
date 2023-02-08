@@ -5,15 +5,13 @@
 
 <div class="container">
 
-  <div class="tab-panel">
+  <!-- build the tab panel from ... -->
+  <app-au-tab-panel>
 
-    <ul class="tab-panel-buttons">
-      <li class="selected">Login</li>
-      <li>Sign Up</li>
-      <li>Contact</li>
-    </ul>
+    <!-- projecting the login tab into the tab-panel, and ... -->
+    <app-au-tab title="Login">
 
-    <div class="tab">
+      <!-- projecting the form into the tab itself -->
       <form>
         <div class="form-field">
           <label>Email:</label><input>
@@ -22,9 +20,13 @@
           <label>Password:</label><input>
         </div>
       </form>
-    </div>
+    </app-au-tab>
 
-    <div class="tab">
+
+    <!-- projecting the sign up tab into the tab-panel, and ... -->
+    <app-au-tab title="Sign Up">
+
+      <!-- projecting the form into the tab itself -->
       <form>
         <div class="form-field">
           <label>Email:</label><input>
@@ -36,9 +38,12 @@
           <label>Confirm Password:</label><input>
         </div>
       </form>
-    </div>
+    </app-au-tab>
 
-    <div class="tab">
+    <!-- projecting the contact tab into the tab-panel ... -->
+    <app-au-tab title="Contact">
+
+      <!-- projecting the form into the tab itself -->
       <form>
         <div class="form-field">
           <label>Email:</label><input>
@@ -48,10 +53,9 @@
           <textarea></textarea>
         </div>
       </form>
-    </div>
+    </app-au-tab>
 
-  </div>
-
+  </app-au-tab-panel>
 
 </div>
 
