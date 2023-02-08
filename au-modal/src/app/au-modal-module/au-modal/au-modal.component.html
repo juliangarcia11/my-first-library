@@ -1,5 +1,8 @@
+<!-- if the overlay is clicked, close the modal -->
 <div class="modal-overlay" (click)="closeModal()">
-  <div class="modal-body">
+
+  <!-- if the modal body is clicked, cancel the click event's propagation -->
+  <div class="modal-body" (click)="cancelClick($event)">
 
     <!-- if the body input has been defined, project the body content -->
     <ng-container *ngIf="body; else projectedContent">
