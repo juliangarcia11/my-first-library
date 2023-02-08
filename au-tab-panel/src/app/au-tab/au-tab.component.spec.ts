@@ -9,8 +9,7 @@ describe('AuTabComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AuTabComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AuTabComponent);
     component = fixture.componentInstance;

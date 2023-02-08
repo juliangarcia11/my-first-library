@@ -17,7 +17,9 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent, AuTabPanelComponent, AuTabComponent
+        AppComponent,
+        AuTabPanelComponent,
+        AuTabComponent
       ],
     }).compileComponents();
   });
@@ -64,22 +66,20 @@ describe('AppComponent', () => {
     expect(selectedButton.nativeElement.textContent).toBe('Contact');
   });
 
-  it('should display contact email item from Contact tab', () => {
+  it('should display contact email item from Contact tab on load', () => {
     expect(contactEmail).toBeTruthy();
   });
 
-  it('should switch tabs to the Login tab', () => {
-    const tabButtons = tabPanel.queryAll(By.css('.tab-panel-buttons li'));
-
-    // simulate user click
-    tabButtons[0].nativeElement.click();
-
-    // manually detect dom changes
-    fixture.detectChanges();
+  it('should have login tab content after tab[0] click', () => {
+    clickFirstTab(tabPanel, fixture);
 
     // verify login email field is truthy
     const loginEmail = tabPanel.query(By.css('.login-email'));
     expect(loginEmail).toBeTruthy();
+  });
+
+  it('should have login tab header after tab[0] click', () => {
+    clickFirstTab(tabPanel, fixture);
 
     // retrieve newly selected panel button
     selectedButton = tabPanel.query(By.css('.tab-panel-buttons li.selected'));
@@ -89,3 +89,13 @@ describe('AppComponent', () => {
     expect(selectedButton.nativeElement.textContent).toBe('Login');
   });
 });
+
+const clickFirstTab = (tabPanel: any, fixture: any) => {
+  const tabButtons = tabPanel.queryAll(By.css('.tab-panel-buttons li'));
+
+  // simulate user click
+  tabButtons[0].nativeElement.click();
+
+  // manually detect dom changes
+  fixture.detectChanges();
+}
