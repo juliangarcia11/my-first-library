@@ -1,7 +1,8 @@
 @import "../theme.scss";
 
 // use :host to select <app-au-tab> blocks
-:host {
+//:host { // temporarily disabling host usage
+.tab {
   display: block;
   border-left: $tab-border;
   border-right: $tab-border;

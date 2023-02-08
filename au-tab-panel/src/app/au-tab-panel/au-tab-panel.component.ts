@@ -12,9 +12,26 @@ export class AuTabPanelComponent implements AfterContentInit {
   @ContentChildren(AuTabComponent)
   tabs: QueryList<AuTabComponent> = new QueryList<AuTabComponent>();
 
+  /**
+   * After content children are done loading in, perform an action
+   */
   ngAfterContentInit() {
-    console.log('after content init', {
-      tabs: this.tabs
-    })
+    // find any selected tab
+    const selectedTab = this.tabs.find(t => t.selected);
+
+    // if no selected tabs
+    if (!selectedTab) {
+      // select the first tab by default
+      this.tabs.first.selected = true;
+    }
+  }
+
+  /**
+   * Set the 'selected' parameter to true for the provided AuTabComponent after setting all others to false
+   * @param tab AuTabComponent The tab to select
+   */
+  selectTab(tab: AuTabComponent) {
+    this.tabs.forEach(t => t.selected = false);
+    tab.selected = true;
   }
 }

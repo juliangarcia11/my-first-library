@@ -7,7 +7,11 @@ import {Component, Input} from '@angular/core';
 })
 export class AuTabComponent {
 
-  // create a referencable item for this tab's title (can be used/shown by other components)
+  // create a referencable item for this tab's title (can be used/shown/set by other components)
   @Input()
   title: string = '';
+
+  // create a referencable item for this tab's selected value (can be used/shown/set by other components)
+  @Input()
+  selected: boolean = false;
 }

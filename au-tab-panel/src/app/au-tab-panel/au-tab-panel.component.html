@@ -1,6 +1,8 @@
 <!-- use retrieved title params from the projected content -->
 <ul class="tab-panel-buttons" *ngIf="tabs">
-  <li *ngFor="let tab of tabs">{{tab.title}}</li>
+  <li *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      [ngClass]="{selected: tab.selected}">{{tab.title}}</li>
 </ul>
 
 <!-- projected content -->
