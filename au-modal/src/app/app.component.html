@@ -20,11 +20,50 @@
 
   <h1>Modal Examples</h1>
 
+  <div class="modal-overlay">
 
+    <div class="modal-body">
 
+      <app-au-tab-panel>
+        <app-au-tab title="Login">
+          <form>
+            <div class="form-field">
+              <app-au-fa-input id="login-email-field" icon="envelope">
+                <input auInput type="email" name="email" placeholder="Email" autocomplete="off">
+              </app-au-fa-input>
+            </div>
+            <div class="form-field">
+              <app-au-fa-input id="login-password" icon="lock">
+                <input auInput type="password" name="password" placeholder="Password" autocomplete="off">
+              </app-au-fa-input>
+            </div>
+          </form>
+        </app-au-tab>
 
+        <app-au-tab title="Sign Up">
+          <form>
+            <div class="form-field">
+              <app-au-fa-input id="sign-up-email-field" icon="envelope">
+                <input auInput type="email" name="email" placeholder="Email" autocomplete="off">
+              </app-au-fa-input>
+            </div>
+            <div class="form-field">
+              <app-au-fa-input id="sign-up-password" icon="lock">
+                <input auInput type="password" name="password" placeholder="Password" autocomplete="off">
+              </app-au-fa-input>
+            </div>
+            <div class="form-field">
+              <app-au-fa-input id="sign-up-password-confirm" icon="lock">
+                <input auInput type="password" name="password" placeholder="Confirm Password" autocomplete="off">
+              </app-au-fa-input>
+            </div>
+          </form>
+        </app-au-tab>
+      </app-au-tab-panel>
 
+    </div>
 
+  </div>
 
 
   <div class="modal-buttons">

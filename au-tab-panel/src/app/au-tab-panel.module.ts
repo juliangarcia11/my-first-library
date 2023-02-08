@@ -15,6 +15,10 @@ import { AuTabComponent } from './au-tab/au-tab.component';
     BrowserModule
   ],
   providers: [],
+  exports: [
+    AuTabPanelComponent,
+    AuTabComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AuTabPanelModule { }
