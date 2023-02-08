@@ -1,4 +1,4 @@
-@import "tab-panel.component";
+@import './theme.scss';
 
 .container {
   margin: 0 auto;
@@ -30,7 +30,7 @@ input {
 }
 
 input, textarea {
-  border: 1px solid grey;
+  border: $grey-border;
 }
 
 

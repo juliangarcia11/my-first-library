@@ -1,6 +1,8 @@
 @import "../theme.scss";
 
-.tab {
+// use :host to select <app-au-tab> blocks
+:host {
+  display: block;
   border-left: $tab-border;
   border-right: $tab-border;
   border-bottom: $tab-border;
