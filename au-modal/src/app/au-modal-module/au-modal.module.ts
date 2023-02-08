@@ -12,7 +12,11 @@ import { AuModalOpenOnClickDirective } from './au-modal-open-on-click.directive'
   imports: [
     CommonModule
   ],
-  exports: [AuModalComponent, AuModalOpenOnClickDirective]
+  exports: [
+    AuModalComponent,
+    AuModalOpenOnClickDirective
+  ],
+  bootstrap: []
 })
 export class AuModalModule {
 
