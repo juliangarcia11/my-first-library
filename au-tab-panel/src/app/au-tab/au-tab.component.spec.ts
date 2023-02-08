@@ -17,7 +17,7 @@ describe('AuTabComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create AuTabComponent', () => {
     expect(component).toBeTruthy();
   });
 });
