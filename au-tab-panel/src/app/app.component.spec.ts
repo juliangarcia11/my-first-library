@@ -67,4 +67,25 @@ describe('AppComponent', () => {
   it('should display contact email item from Contact tab', () => {
     expect(contactEmail).toBeTruthy();
   });
+
+  it('should switch tabs to the Login tab', () => {
+    const tabButtons = tabPanel.queryAll(By.css('.tab-panel-buttons li'));
+
+    // simulate user click
+    tabButtons[0].nativeElement.click();
+
+    // manually detect dom changes
+    fixture.detectChanges();
+
+    // verify login email field is truthy
+    const loginEmail = tabPanel.query(By.css('.login-email'));
+    expect(loginEmail).toBeTruthy();
+
+    // retrieve newly selected panel button
+    selectedButton = tabPanel.query(By.css('.tab-panel-buttons li.selected'));
+
+    // verify selected button exists && is the login button
+    expect(selectedButton.nativeElement).toBeTruthy();
+    expect(selectedButton.nativeElement.textContent).toBe('Login');
+  });
 });
