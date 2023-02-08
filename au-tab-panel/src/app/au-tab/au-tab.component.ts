@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-au-tab',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AuTabComponent {
 
+  // create a referencable item for this tab's title (can be used/shown by other components)
+  @Input()
+  title: string = '';
 }
