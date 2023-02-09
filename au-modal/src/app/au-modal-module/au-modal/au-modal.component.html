@@ -1,5 +1,5 @@
 <!-- if the overlay is clicked, close the modal -->
-<div class="modal-overlay" (click)="closeModal()">
+<div class="modal-overlay" (click)="onClickOutsideModal()">
 
   <!-- if the modal body is clicked, cancel the click event's propagation -->
   <div class="modal-body" (click)="cancelClick($event)">
