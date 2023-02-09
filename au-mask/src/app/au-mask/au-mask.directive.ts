@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Input, OnInit} from '@angular/core';
-import {SPECIAL_CHARACTERS} from "./mask.utils";
+import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {BACKSPACE, DELETE, LEFT_ARROW, RIGHT_ARROW, SPECIAL_CHARACTERS, TAB} from "./mask.utils";
 
 @Directive({
   selector: '[au-mask]'
@@ -20,6 +20,16 @@ export class AuMaskDirective implements OnInit {
   ngOnInit(): void {
     // set the initial input value as the page loads up
     this.input.value = this.buildPlaceHolder();
+
+  }
+
+  @HostListener('keydown', ['$event', '$event.keyCode'])
+  onKeyDown($event: KeyboardEvent, keyCode: number): void {
+
+    if (keyCode !== TAB) {
+      // stop default handling
+      $event.preventDefault();
+    }
 
   }
 
