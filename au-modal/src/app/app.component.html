@@ -76,11 +76,17 @@
 
   </app-au-modal>
 
+  <app-au-modal id="testModal" *appAuModalOpenOnClick="testButton">
+
+  </app-au-modal>
+
   <div class="modal-buttons">
 
     <button #loginButton (click)="setLoginActive(true)">Login</button>
 
     <button #signUpButton (click)="setLoginActive(false)">Sign Up</button>
+
+    <button #testButton id="testButton">Test Button</button>
 
   </div>
 
