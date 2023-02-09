@@ -21,10 +21,13 @@
   <h1>Modal Examples</h1>
 
   <!-- define a custom modal body to be projected into the app-au-modal -->
-  <ng-template #authModalBody>
+  <!-- variables in this template are pulled from the context parameter on app-au-modal -->
+  <ng-template #authModalBody let-title="title" let-loginTabActive="loginTabActive">
+
+    <h5>{{title}}</h5>
 
     <app-au-tab-panel>
-      <app-au-tab title="Login">
+      <app-au-tab title="Login" [selected]="loginTabActive">
         <form>
           <div class="form-field">
             <app-au-fa-input id="login-email-field" icon="envelope">
@@ -39,7 +42,7 @@
         </form>
       </app-au-tab>
 
-      <app-au-tab title="Sign Up">
+      <app-au-tab title="Sign Up"  [selected]="!loginTabActive">
         <form>
           <div class="form-field">
             <app-au-fa-input id="sign-up-email-field" icon="envelope">
@@ -65,6 +68,7 @@
   <!-- add the modal to the page and use the authModalBody as the body input of the app-au-modal -->
   <app-au-modal #modal class="auth-modal"
                 [body]="authModalBody"
+                [context]="{ title: 'Login or Sign Up', loginTabActive: loginActive }"
                 *appAuModalOpenOnClick="[loginButton, signUpButton]">
 
     <!-- project this icon in to be used as the close icon, and when click will trigger the close event on the modal -->
@@ -74,9 +78,9 @@
 
   <div class="modal-buttons">
 
-    <button #loginButton>Login</button>
+    <button #loginButton (click)="setLoginActive(true)">Login</button>
 
-    <button #signUpButton>Sign Up</button>
+    <button #signUpButton (click)="setLoginActive(false)">Sign Up</button>
 
   </div>
 

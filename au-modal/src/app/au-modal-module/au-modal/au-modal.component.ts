@@ -18,6 +18,10 @@ export class AuModalComponent {
   @Input()
   body: TemplateRef<any> | undefined;
 
+  // template context (currently used in the body template)
+  @Input()
+  context: any;
+
   // allow references to customizable behavior flags
   @Input()
   hideOnEsc: boolean = true;
