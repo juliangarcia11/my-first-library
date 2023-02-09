@@ -49,10 +49,18 @@ export class AuMaskDirective implements OnInit {
     switch (keyCode) {
       case LEFT_ARROW:
         this.handleMoveCursorLeft(cursorPos);
-
         return;
+
       case RIGHT_ARROW:
         this.handleMoveCursorRight(cursorPos);
+        return;
+
+      case BACKSPACE:
+        this.handleBackspace(cursorPos);
+        return;
+
+      case DELETE:
+        this.handleDelete(cursorPos);
         return;
     }
 
@@ -74,13 +82,7 @@ export class AuMaskDirective implements OnInit {
    * @private
    */
   private handleMoveCursorLeft(cursorPos: number) {
-    // get the character before the cursor
-    const valueBeforeCursor = this.input.value.slice(0, cursorPos);
-    let pos = valueBeforeCursor.length - 1;
-    // previous position is the current position minus how many characters we need to travel left to not hit one in the special characters list
-    const previousPos = pos - valueBeforeCursor.split('').reverse().findIndex((value, i) => {
-      return !SPECIAL_CHARACTERS.includes(value);
-    });
+    const previousPos = this.calculatePreviousCursorPosition(cursorPos);
 
     // if a previous position was found
     if (previousPos >= 0) {
@@ -109,6 +111,51 @@ export class AuMaskDirective implements OnInit {
       // place the cursor at the particular position in the input
       this.input.setSelectionRange(newCursorPos, newCursorPos);
     }
+  }
+
+  /**
+   * Remove the character before the cursor position and replace it with the corresponding mask placeholder char
+   * @param cursorPos
+   * @private
+   */
+  private handleBackspace(cursorPos: number) {
+    const previousPos = this.calculatePreviousCursorPosition(cursorPos);
+
+    // if a previous position was found
+    if (previousPos >= 0) {
+      // use the function from mask.utils.ts
+      overWriteCharAtPosition(this.input, cursorPos, '_');
+      // place the cursor at the particular position in the input
+      this.input.setSelectionRange(previousPos, previousPos);
+    }
+  }
+
+
+  /**
+   * Remove the character after the cursor position and replace it with the corresponding mask placeholder char
+   * @param cursorPos
+   * @private
+   */
+  private handleDelete(cursorPos: number) {
+    overWriteCharAtPosition(this.input, cursorPos, '_');
+    this.input.setSelectionRange(cursorPos, cursorPos);
+  }
+
+  /**
+   * Given a current cursor position, calculate the proper position before it that does not contain a char from the
+   * SPECIAL_CHARACTERS list
+   * @param cursorPos
+   * @private
+   */
+  private calculatePreviousCursorPosition(cursorPos: number) {
+    // get the character before the cursor
+    const valueBeforeCursor = this.input.value.slice(0, cursorPos);
+    let pos = valueBeforeCursor.length - 1;
+    // previous position is the current position minus how many characters we need to travel left to not hit one in the special characters list
+    const previousPos = pos - valueBeforeCursor.split('').reverse().findIndex((value, i) => {
+      return !SPECIAL_CHARACTERS.includes(value);
+    });
+    return previousPos;
   }
 
   /**
