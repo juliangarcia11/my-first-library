@@ -8,7 +8,7 @@ import {
   SPECIAL_CHARACTERS,
   TAB
 } from "./mask.utils";
-import {maskDigitValidators} from "./digit_validators";
+import {maskDigitValidators, neverValidator} from "./digit_validators";
 
 @Directive({
   selector: '[au-mask]'
@@ -43,8 +43,7 @@ export class AuMaskDirective implements OnInit {
     const key = String.fromCharCode(keyCode);
     const cursorPos = this.input.selectionStart;
 
-    if (!cursorPos) return;
-
+    if (cursorPos == null) return;
 
     // if the keyCode is one of the following, handle a cursor movement
     switch (keyCode) {
@@ -59,7 +58,8 @@ export class AuMaskDirective implements OnInit {
 
     // else if the keyCode matches its digitValidator, add the key to the input and move the cursor one position to the right
     const maskDigit = this.mask.charAt(cursorPos);
-    const digitValidator = maskDigitValidators[maskDigit];
+    // use a defined validator or the neverValidator if no matching validator is found
+    const digitValidator = maskDigitValidators[maskDigit] || neverValidator;
 
     if (digitValidator(key)) {
       // use the function from mask.utils.ts
