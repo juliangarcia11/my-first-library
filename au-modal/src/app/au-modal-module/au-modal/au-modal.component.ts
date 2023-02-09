@@ -31,13 +31,13 @@ export class AuModalComponent {
   @HostListener('window:keyup.esc', ['$event'])
   keyEsc(event: KeyboardEvent): void {
     if (this.hideOnEsc)
-      this.closeModal();
+      this.close();
   }
 
   /**
    * Request that the modal service communicate the closure request
    */
-  closeModal(): void {
+  close(): void {
     this.modalService.close();
   }
 
@@ -55,6 +55,6 @@ export class AuModalComponent {
    */
   onClickOutsideModal() {
     if (this.hideOnClickOutside)
-      this.closeModal();
+      this.close();
   }
 }

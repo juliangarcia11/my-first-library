@@ -63,9 +63,14 @@
   </ng-template>
 
   <!-- add the modal to the page and use the authModalBody as the body input of the app-au-modal -->
-  <app-au-modal class="auth-modal"
+  <app-au-modal #modal class="auth-modal"
                 [body]="authModalBody"
-                *appAuModalOpenOnClick="[loginButton, signUpButton]"></app-au-modal>
+                *appAuModalOpenOnClick="[loginButton, signUpButton]">
+
+    <!-- project this icon in to be used as the close icon, and when click will trigger the close event on the modal -->
+    <i class="fa fa-times" (click)="modal.close()"></i>
+
+  </app-au-modal>
 
   <div class="modal-buttons">
 

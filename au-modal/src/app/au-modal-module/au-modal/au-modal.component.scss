@@ -11,7 +11,7 @@ $secondary: rgba(0, 0, 0, 0.117647);
   transform: translate(-50%, -50%);
   z-index: 20;
   $border: 1px solid $secondary;
-  border:$border;
+  border: $border;
   border-radius: 4px;
   background: white;
   box-shadow: 0 1px 16px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.14), 0 4px 8px -1px rgba(0, 0, 0, 0.12);
@@ -45,6 +45,5 @@ $secondary: rgba(0, 0, 0, 0.117647);
   right: 5px;
   top: 5px;
   height: 15px;
-
 }
 

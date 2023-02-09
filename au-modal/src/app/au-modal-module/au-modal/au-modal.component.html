@@ -4,6 +4,11 @@
   <!-- if the modal body is clicked, cancel the click event's propagation -->
   <div class="modal-body" (click)="cancelClick($event)">
 
+    <!-- project the close icon template here-->
+    <div class="close-icon">
+      <ng-content select="i"></ng-content>
+    </div>
+
     <!-- if the body input has been defined, project the body content -->
     <ng-container *ngIf="body; else projectedContent">
       <ng-container *ngTemplateOutlet="body"></ng-container>
