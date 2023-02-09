@@ -19,31 +19,63 @@ export class AuMaskDirective implements OnInit {
   mask: string = '';
 
   input: HTMLInputElement;
+  fullFieldSelected: boolean = false;
 
-  constructor(
-    el: ElementRef
-  ) {
+  constructor( el: ElementRef ) {
+    // hold a reference to the input element
     this.input = el.nativeElement;
   }
 
   ngOnInit(): void {
     // set the initial input value as the page loads up
     this.input.value = this.buildPlaceHolder();
-
   }
 
+  /**
+   * On selection events, set the flag to true if the full input field is selected
+   * @param $event
+   */
+  @HostListener('select', ['$event'])
+  onSelect($event: UIEvent): void {
+    this.fullFieldSelected = this.input.selectionStart === 0 &&
+      this.input.selectionEnd === this.input.value.length;
+  }
+
+  /**
+   * On key down events when the meta nor control keys are currently pressed,
+   *    if the key was not the tab key, custom handle the event
+   * @param $event KeyboardEvent
+   * @param keyCode
+   */
   @HostListener('keydown', ['$event', '$event.keyCode'])
   onKeyDown($event: KeyboardEvent, keyCode: number): void {
+    // if the alt or ctrl keys are pressed, bail and let the event handle itself
+    if ($event.metaKey || $event.ctrlKey) { return; }
 
+    // if any key but the tab key was pressed, prevent its default action
     if (keyCode !== TAB) {
       // stop default handling
       $event.preventDefault();
     }
 
+    // retrieve info about the key pressed
     const key = String.fromCharCode(keyCode);
     const cursorPos = this.input.selectionStart;
 
+    // as long as the cursor position is not null, continue
     if (cursorPos == null) return;
+
+    // if the full field is selected
+    if (this.fullFieldSelected) {
+      // reset the input value to the placeholder value
+      this.input.value = this.buildPlaceHolder();
+
+      // find the first underscore in the placeholder
+      const firstPlaceholderPos = this.input.value.split('').findIndex(char => char === '_');
+
+      // move the cursor to that position
+      this.input.setSelectionRange(firstPlaceholderPos, firstPlaceholderPos);
+    }
 
     // if the keyCode is one of the following, handle a cursor movement
     switch (keyCode) {
@@ -69,6 +101,7 @@ export class AuMaskDirective implements OnInit {
     // use a defined validator or the neverValidator if no matching validator is found
     const digitValidator = maskDigitValidators[maskDigit] || neverValidator;
 
+    // if the validator returns true
     if (digitValidator(key)) {
       // use the function from mask.utils.ts
       overWriteCharAtPosition(this.input, cursorPos, key);
@@ -152,10 +185,9 @@ export class AuMaskDirective implements OnInit {
     const valueBeforeCursor = this.input.value.slice(0, cursorPos);
     let pos = valueBeforeCursor.length - 1;
     // previous position is the current position minus how many characters we need to travel left to not hit one in the special characters list
-    const previousPos = pos - valueBeforeCursor.split('').reverse().findIndex((value, i) => {
+    return pos - valueBeforeCursor.split('').reverse().findIndex((value, i) => {
       return !SPECIAL_CHARACTERS.includes(value);
     });
-    return previousPos;
   }
 
   /**
