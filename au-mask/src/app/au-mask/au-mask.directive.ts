@@ -1,5 +1,13 @@
 import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {BACKSPACE, DELETE, LEFT_ARROW, RIGHT_ARROW, SPECIAL_CHARACTERS, TAB} from "./mask.utils";
+import {
+  BACKSPACE,
+  DELETE,
+  LEFT_ARROW,
+  overWriteCharAtPosition,
+  RIGHT_ARROW,
+  SPECIAL_CHARACTERS,
+  TAB
+} from "./mask.utils";
 
 @Directive({
   selector: '[au-mask]'
@@ -31,6 +39,10 @@ export class AuMaskDirective implements OnInit {
       $event.preventDefault();
     }
 
+    const key = String.fromCharCode(keyCode);
+    const cursorPos = this.input.selectionStart ?? this.input.size;
+    // use the function from mask.utils.ts
+    overWriteCharAtPosition(this.input, cursorPos, key);
   }
 
   /**
