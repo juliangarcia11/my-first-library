@@ -6,7 +6,7 @@ import {By} from "@angular/platform-browser";
 
 @Component({
   template: `
-    <app-au-modal *appAuModalOpenOnClick="testerButton"></app-au-modal>
+    <app-au-modal *appAuModalOpenOnClick="testerButton" id="testerModal"></app-au-modal>
     <button #testerButton id="testerButton"></button>
   `,
 })
@@ -15,8 +15,10 @@ class WrapperComponent {
 }
 
 describe('AuModalOpenOnClickDirective', () => {
-  let directives: DebugElement[];
-  let fixture: ComponentFixture<WrapperComponent>;
+  let component: WrapperComponent,
+      fixture: ComponentFixture<WrapperComponent>,
+      el: DebugElement,
+      modal: DebugElement;
 
   beforeEach( async() => {
     await TestBed.configureTestingModule({
@@ -26,20 +28,27 @@ describe('AuModalOpenOnClickDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WrapperComponent);
-
-    // const triggerBtn = fixture.debugElement.query(By.css('#testerButton'));
-    // triggerBtn.nativeElement.click();
+    component = fixture.componentInstance;
+    el = fixture.debugElement;
+    modal = el.query(By.css('#testModal'));
 
     fixture.detectChanges();
-    directives = fixture.debugElement.queryAll(By.directive(AuModalOpenOnClickDirective));
-
   })
 
-  it('should show the directive is truthy', () => {
-    const triggerBtn = fixture.debugElement.query(By.css('#testerButton'));
-    triggerBtn.nativeElement.click();
-    fixture.detectChanges();
-    console.log('what is a directive', directives);
-    expect(directives).toBeTruthy();
+  // each 'it' is a test
+  it('should create the WrapperComponent', () => {
+    expect(component).toBeTruthy();
   });
+
+  it('should not add the modal to the page by default', () => {
+    expect(modal).toBeFalsy();
+  });
+
+  it('should open the modal when the test button is clicked', () => {
+    fixture.debugElement.nativeElement.querySelector('#testerButton').click();
+    fixture.detectChanges();
+
+    const openedModal = fixture.debugElement.nativeElement.querySelector('#testerModal');
+    expect(openedModal).toBeTruthy();
+  })
 });

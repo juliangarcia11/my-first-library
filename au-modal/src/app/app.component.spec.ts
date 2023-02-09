@@ -62,5 +62,4 @@ describe('AppComponent', () => {
     const openedModal = fixture.debugElement.nativeElement.querySelector('#testModal');
     expect(openedModal).toBeTruthy();
   })
-
 });
