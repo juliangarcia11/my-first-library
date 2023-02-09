@@ -40,17 +40,85 @@ export class AuMaskDirective implements OnInit {
     }
 
     const key = String.fromCharCode(keyCode);
-    const cursorPos = this.input.selectionStart ?? this.input.size;
-    // use the function from mask.utils.ts
-    overWriteCharAtPosition(this.input, cursorPos, key);
+    const cursorPos = this.input.selectionStart;
+
+    if (!cursorPos) return;
+
+
+    console.log('whats happening today', {
+      event: $event, keyCode, key, cursorPos,
+    })
+
+
+    switch (keyCode) {
+      case LEFT_ARROW:
+        this.handleMoveCursorLeft(cursorPos);
+
+        return;
+      case RIGHT_ARROW:
+        this.handleMoveCursorRight(cursorPos);
+        return;
+
+      default:
+        // use the function from mask.utils.ts
+        overWriteCharAtPosition(this.input, cursorPos, key);
+        this.handleMoveCursorRight(cursorPos);
+    }
+  }
+
+  /**
+   * Move the cursor position on the input to the left by one index based on the cursor position provided
+   * @param cursorPos number
+   * @private
+   */
+  private handleMoveCursorLeft(cursorPos: number) {
+    // get the character before the cursor
+    const valueBeforeCursor = this.input.value.slice(0, cursorPos);
+    let pos = valueBeforeCursor.length - 1;
+    // previous position is the current position minus how many characters we need to travel left to not hit one in the special characters list
+    const previousPos = pos - valueBeforeCursor.split('').reverse().findIndex((value, i) => {
+      return !SPECIAL_CHARACTERS.includes(value);
+    });
+
+    // if a previous position was found
+    if (previousPos >= 0) {
+      // place the cursor at the particular position in the input
+      this.input.setSelectionRange(previousPos, previousPos);
+    }
+  }
+
+  /**
+   * Move the cursor position on the input to the right by one index based on the cursor position provided
+   * @param cursorPos number
+   * @private
+   */
+  private handleMoveCursorRight(cursorPos: number) {
+    // get the character after the cursor
+    const valueAfterCursor = this.input.value.slice(cursorPos + 1);
+    // next position is the current position plus how many characters we need to travel right to not hit one in the special characters list
+    const nextPos = valueAfterCursor.split('').findIndex((value, i) => {
+      return !SPECIAL_CHARACTERS.includes(value);
+    });
+
+    // if a next position was found
+    if (nextPos >= 0) {
+      // calculate the new position of the cursor
+      const newCursorPos = cursorPos + nextPos + 1;
+      // place the cursor at the particular position in the input
+      this.input.setSelectionRange(newCursorPos, newCursorPos);
+    }
   }
 
   /**
    * Using the mask param, build a placeholder string made from chars from the SPECIAL_CHARACTERS list and underscores
+   *     for example ---> '(999) 999-9999' ===> '(___) ___-____'
    * @private
    */
   private buildPlaceHolder(): string {
+    // create an iterable string array
     const chars = this.mask.split('');
+    // for every char in chars, combine the preceding result with an item from the SPECIAL_CHARACTERS list or an '_'
+    // for example ---> '(999) 999-9999' ===> '(___) ___-____'
     return chars.reduce((result, char) => {
       return result += SPECIAL_CHARACTERS.includes(char) ? char : '_';
     }, '');
